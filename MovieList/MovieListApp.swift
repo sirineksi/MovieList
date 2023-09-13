@@ -9,9 +9,23 @@ import SwiftUI
 
 @main
 struct MovieListApp: App {
+    
+    @StateObject private var movieStore = MovieStore()
+    
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView{
+                MovieListView(movieStore: movieStore)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            NavigationLink(destination: AddMovieView(movieStore: movieStore)) {
+                                Text("Ekle")
+                            }
+                        }
+                        
+                    }
+            }
         }
     }
 }
